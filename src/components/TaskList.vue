@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <CreateTask
       @getTask="onGetTask"
       @removeList0="onRemoveList"
@@ -44,10 +44,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.wrap {
+  border-radius: 3px 3px 0 0;
+  margin: 20px auto 0 auto;
+}
 ul {
-  max-width: 1020px;
+  max-width: 920px;
   background: lightgray;
   margin: 0 auto;
   padding: 0;
+  border-radius: 0 0 3px 3px;
 }
 </style>

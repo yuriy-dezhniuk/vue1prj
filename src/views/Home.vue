@@ -1,10 +1,7 @@
 <template>
   <div class="home">
-    <button class="log-out">Log Out</button><br>
-    <button
-      class="add-list"
-      @click="showAddListForm"
-    >Add New List</button>
+    <button class="log-out">Log Out</button><br><br>
+    <button @click="showAddListForm">Add New List</button>
     <ul class="lists-wrap">
       <TaskList
         @removeList1="removeList"
@@ -104,22 +101,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  ul {
+    padding: 0;
+  }
   .home {
     margin: 30px auto;
     max-width: 1200px;
-    // position: relative;
   }
   .log-out {
     float: right;
-    // position: absolute;
-    // right: 3%;
-    // top: 10px;
   }
   button {
     cursor: pointer;
+    padding: 5px;
   }
-  .add-list {
-    margin-top: 25px;
-  }
-
 </style>

@@ -2,14 +2,13 @@
   <div @click="closeForm" class="fullscreen">
     <form v-on:submit.prevent="">
       <input
+        v-focus
         type="text"
         v-model="listTitle"
-        placeholder="Ente list name"
+        placeholder="Ente the list name"
         @keyup.enter="onClick"
       >
-      <button
-        @click="onClick"
-      >Create List</button>
+      <button @click="onClick">Create List</button>
     </form>
   </div>
 </template>
@@ -27,9 +26,16 @@ export default {
     },
     closeForm(e) {
       if (e.target.className === 'fullscreen') {
-        console.log(e.target.className);
         this.$emit('onCloseForm');
       }
+    },
+  },
+  directives: {
+    focus: {
+    // определение директивы
+      inserted(el) {
+        el.focus();
+      },
     },
   },
 };

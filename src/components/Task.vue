@@ -1,10 +1,12 @@
 <template>
   <li :class="{done: task.taskState}">
     <input
+      v-focus
       type="text"
       placeholder="What needs to be done?"
       v-if="!saveEditBtnsVisibility"
       v-model="task.taskText"
+      @keyup.enter="saveEditedTask"
     >
     <div>
       <input
@@ -64,6 +66,14 @@ export default {
       this.btnDisable = !this.btnDisable;
     },
   },
+  directives: {
+    focus: {
+    // определение директивы
+      inserted(el) {
+        el.focus();
+      },
+    },
+  },
 };
 </script>
 
@@ -79,34 +89,17 @@ export default {
   }
   li {
     list-style-type: none;
-    margin: 0 10px 10px 10px;
     border-bottom:  1px solid gray;
-    padding: 1rem 0 2.5rem 0;
+    padding: 1rem 10px 2.5rem 10px;
     text-align: justify;
     & .linethrough {
       text-decoration: line-through;
     }
-    // & .indicator::after {
-    //   content: "\2013";
-    //   padding: 0 10px;
-    //   border: 1px solid red;
-    //   background-color: pink;
-    //   border-radius: 3px;
-    //   margin-right: 10px;
-    // }
-    // & .indicator.done::after {
-    //   content: "\2713";
-    //   padding: 0 8px;
-    //   border: 1px solid green;
-    //   background-color: lightgreen;
-    // }
     & .item-btn {
-      // border: 1px solid lightgray;
       border-radius: 3px;
-      // padding: 10px;
-      // color: gray;
       max-height: 35px;
       margin-left: 10px;
+      margin-top: 5px;
       cursor: pointer;
       float: right;
     }
@@ -114,17 +107,18 @@ export default {
       filter: invert(10%);
     }
     & input[type="text"] {
-      // flex-grow: 1;
       margin: 0 10px 10px 0;
       border-radius: 3px;
-      // border: 1px solid lightgray;
       padding-left: 10px;
-      padding: 10px;
-      // font-size: 1rem;
+      padding: 5px;
       width: 90%;
     }
     & input[type="checkbox"] {
       margin-right: 10px;
     }
+  }
+  li:last-child {
+    border-bottom:  0;
+    border-radius: 0 0 3px 3px;
   }
 </style>

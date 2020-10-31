@@ -1,27 +1,26 @@
 <template>
-    <form v-on:submit.prevent="">
-      <div class="title-wrap">
-        <button
-          class="remove-list-btn"
-          @click="onClickRemoveListBtn"
-        >Remove list</button>
-        <h2> {{ todoList.listTitle }} </h2>
-      </div>
-      <div class="input-wrap">
+  <div class="wrap">
+    <div class="title-wrap">
+      <button
+        class="remove-list-btn"
+        @click="onClickRemoveListBtn"
+        type="button"
+      >Remove list</button>
+      <h2> {{ todoList.listTitle }} </h2>
+    </div>
+    <form v-on:submit.prevent="createTask">
         <input
           type="text"
           v-model="taskText"
           placeholder="What needs to be done?"
-          @keyup.enter="createTask"
         >
         <button
-          @click="createTask"
           class="create-task-btn"
         >
           Create
         </button>
-      </div>
     </form>
+  </div>
 </template>
 
 <script>
@@ -39,8 +38,7 @@ export default {
       this.taskText = '';
     },
     onClickRemoveListBtn() {
-      // console.log(this.todoList.listId);
-      this.$emit('removeList0', this.todoList.listId); debugger;
+      this.$emit('removeList0', this.todoList.listId);
     },
   },
   props: ['todoList'],
@@ -49,12 +47,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-form {
+.wrap {
+  max-width: 900px;
+  margin: 10px auto 0 auto;
+  padding: 5px 10px 15px 10px;
   background: lightgray;
-  border-radius: 3px 3px 0 0;
-  max-width: 1000px;
-  margin: 20px auto 0 auto;
-  padding: 10px;
   & button {
     border-radius: 3px;
     cursor: pointer;
@@ -62,7 +59,7 @@ form {
   & button:hover {
     filter: invert(10%);
   }
-  & .title-wrap {
+    & .title-wrap {
     padding: 10px 0;
     & .remove-list-btn {
       height: 30px;
@@ -74,22 +71,15 @@ form {
       text-align: justify;
     }
   }
-  .input-wrap {
-    display: flex;
-    justify-content: space-between;
-    & input {
-      flex-grow: 1;
-      margin-right: 10px;
-    }
-    & .create-task-btn {
-      // flex: 0 1 auto;
-    }
+}
+form {
+  display: flex;
+  justify-content: space-between;
+  & input {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 3px;
   }
 }
-// ul {
-//   max-width: 1020px;
-//   background: lightgray;
-//   margin: 0 auto;
-//   padding: 0;
-// }
 </style>
