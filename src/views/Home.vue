@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <button class="log-out">Log Out</button><br><br>
+    <!-- <button class="log-out">Log Out</button> -->
+    <router-link to="/signin" class="log-out">Log Out</router-link>
+    <br><br>
     <button @click="showAddListForm">Add New List</button>
     <ul class="lists-wrap">
       <TaskList
@@ -110,6 +112,14 @@ export default {
   }
   .log-out {
     float: right;
+    cursor: pointer;
+    padding: 5px;
+    color: inherit;
+    font-size: 13.3333px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px outset rgb(133, 133, 133);
+    border-radius: 3px;
   }
   button {
     cursor: pointer;

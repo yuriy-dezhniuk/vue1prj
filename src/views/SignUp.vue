@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="fullscreen">
         <div class="fullscreen-body">
-          <signInForm />
+          <signUpForm />
         </div>
       </div>
     </div>
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import signInForm from '@/components/signInForm.vue';
+import signUpForm from '@/components/signUpForm.vue';
 
 export default {
-  name: 'SignIn',
+  name: 'SignUp',
   components: {
-    signInForm,
+    signUpForm,
   },
 };
 </script>

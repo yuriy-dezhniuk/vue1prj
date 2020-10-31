@@ -9,16 +9,12 @@
       <h2> {{ todoList.listTitle }} </h2>
     </div>
     <form v-on:submit.prevent="createTask">
-        <input
-          type="text"
-          v-model="taskText"
-          placeholder="What needs to be done?"
-        >
-        <button
-          class="create-task-btn"
-        >
-          Create
-        </button>
+      <input
+        type="text"
+        v-model="taskText"
+        placeholder="What needs to be done?"
+      >
+      <button>Create</button>
     </form>
   </div>
 </template>
