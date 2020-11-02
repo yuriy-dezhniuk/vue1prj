@@ -1,13 +1,5 @@
 <template>
   <li :class="{done: task.taskState}">
-    <input
-      v-focus
-      type="text"
-      placeholder="What needs to be done?"
-      v-if="!saveEditBtnsVisibility"
-      v-model="task.taskText"
-      @keyup.enter="saveEditedTask"
-    >
     <div>
       <input
         type="checkbox"
@@ -20,17 +12,6 @@
     </div>
     <button
       class="item-btn"
-      :class="{'btn-disable': btnDisable}"
-      v-if="saveEditBtnsVisibility"
-      @click="showEditingElements"
-    >Edit</button>
-    <button
-      class="item-btn"
-      v-if="!saveEditBtnsVisibility"
-      @click="saveEditedTask"
-    >Save</button>
-    <button
-      class="item-btn"
       @click="onClickDeltTaskBtn"
     >Delete</button>
   </li>
@@ -40,10 +21,6 @@
 export default {
   name: 'Task',
   props: ['task', 'listId'],
-  data: () => ({
-    saveEditBtnsVisibility: true,
-    btnDisable: false,
-  }),
   methods: {
     onClickDeltTaskBtn() {
       this.$emit('onClickDeltTaskBtn1', {
@@ -51,27 +28,8 @@ export default {
         listId: this.listId,
       });
     },
-    showEditingElements() {
-      this.saveEditBtnsVisibility = false;
-    },
-    saveEditedTask() {
-      const emptyStr = /(^\s{1,}$)|(^.{0}$)/;
-      if (!this.task.taskText.match(emptyStr)) {
-        this.saveEditBtnsVisibility = true;
-      } else {
-        alert('Task should not be empty, enter data or delete task');
-      }
-    },
     clickOnCheckbox() {
       this.btnDisable = !this.btnDisable;
-    },
-  },
-  directives: {
-    focus: {
-    // определение директивы
-      inserted(el) {
-        el.focus();
-      },
     },
   },
 };
