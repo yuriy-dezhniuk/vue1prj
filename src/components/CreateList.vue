@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import onfocus from '@/directives/focus.vue';
+
 export default {
   name: 'CreateTask',
   data: () => ({
@@ -31,12 +33,7 @@ export default {
     },
   },
   directives: {
-    focus: {
-    // определение директивы
-      inserted(el) {
-        el.focus();
-      },
-    },
+    focus: onfocus,
   },
 };
 </script>
