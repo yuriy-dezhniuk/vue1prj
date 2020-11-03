@@ -17,6 +17,7 @@
       v-model="userPassword"
     >
     <button
+      type="submit"
       class="sign-in"
     >Sign In</button>
   </form>
@@ -32,11 +33,10 @@ export default {
   }),
   methods: {
     signIn() {
-      const emptyStr = /(^\s{1,}$)|(^.{0}$)/;
       const emaiRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
       if (
-        this.userEmail.match(emaiRegExp)
-        && !this.userPassword.match(emptyStr)
+        emaiRegExp.test(this.userEmail)
+        && this.userPassword.trim()
       ) {
         alert('You are signed in');
       } else {

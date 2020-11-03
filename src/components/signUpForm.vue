@@ -5,7 +5,7 @@
       Already have an account, please
       <router-link to="/signin">Sign In</router-link>
     </p>
-  <form @submit.prevent="">
+  <form @submit.prevent="signUp">
     <input
       type="text"
       placeholder="Email"
@@ -22,8 +22,8 @@
       v-model="userPasswordConfirm"
     >
     <button
+      type="submit"
       class="sign-up"
-      @click="signUp"
     >Sign Up</button>
   </form>
   </div>
@@ -39,11 +39,10 @@ export default {
   }),
   methods: {
     signUp() {
-      const emptyStr = /(^\s{1,}$)|(^.{0}$)/;
       const emaiRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
       if (
         this.userEmail.match(emaiRegExp)
-        && !this.userPassword.match(emptyStr)
+        && this.userPassword.trim()
         && (this.userPassword === this.userPasswordConfirm)
       ) {
         alert('You are signed up');
