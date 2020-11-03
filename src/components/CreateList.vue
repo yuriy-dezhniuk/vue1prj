@@ -1,6 +1,6 @@
 <template>
   <div @click="closeForm" class="fullscreen">
-    <form v-on:submit.prevent="">
+    <form @submit.prevent="">
       <input
         v-focus
         type="text"
@@ -23,8 +23,12 @@ export default {
   }),
   methods: {
     onClick() {
-      this.$emit('getListTitle', this.listTitle);
-      this.listTitle = '';
+      if (this.listTitle.trim()) {
+        this.$emit('getListTitle', this.listTitle);
+        this.listTitle = '';
+      } else {
+        alert('Title should not be empty');
+      }
     },
     closeForm(e) {
       if (e.target.className === 'fullscreen') {

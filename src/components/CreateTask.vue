@@ -2,13 +2,13 @@
   <div class="wrap">
     <div class="title-wrap">
       <button
+        type="button"
         class="remove-list-btn"
         @click="onClickRemoveListBtn"
-        type="button"
       >Remove list</button>
       <h2> {{ todoList.listTitle }} </h2>
     </div>
-    <form v-on:submit.prevent="createTask">
+    <form @submit.prevent="createTask">
       <input
         type="text"
         v-model="taskText"
@@ -27,11 +27,15 @@ export default {
   }),
   methods: {
     createTask() {
-      this.$emit('getTask', {
-        taskText: this.taskText,
-        listId: this.todoList.listId,
-      });
-      this.taskText = '';
+      if (this.taskText.trim()) {
+        this.$emit('getTask', {
+          taskText: this.taskText,
+          listId: this.todoList.listId,
+        });
+        this.taskText = '';
+      } else {
+        alert('Task should not be empty');
+      }
     },
     onClickRemoveListBtn() {
       this.$emit('removeList0', this.todoList.listId);

@@ -1,9 +1,9 @@
 <template>
   <div class="wrap">
     <CreateTask
+      :todoList="todoList"
       @getTask="onGetTask"
       @removeList0="onRemoveList"
-      :todoList="todoList"
     />
     <ul>
       <Task

@@ -6,12 +6,12 @@
     <button @click="showAddListForm">Add New List</button>
     <ul class="lists-wrap">
       <TaskList
-        @removeList1="removeList"
-        @addTaskToList="addTask"
-        @onClickDeltTaskBtn3="removeTask"
         v-for="todoList in todoLists"
         :key="todoList.listId"
         :todoList="todoList"
+        @removeList1="removeList"
+        @addTaskToList="addTask"
+        @onClickDeltTaskBtn3="removeTask"
       />
     </ul>
     <CreateList
@@ -48,19 +48,12 @@ export default {
   },
   methods: {
     addNewList(listTitle) {
-      const emptyStr = /(^\s{1,}$)|(^.{0}$)/;
-      if (!listTitle.match(emptyStr)) {
-        this.todoLists.unshift(
-          {
-            listId: `LId-${this.generateID()}`,
-            listTitle,
-            tasks: [],
-          },
-        );
-        this.hideAddListForm();
-      } else {
-        alert('Title should not be empty');
-      }
+      this.todoLists.unshift({
+        listId: `LId-${this.generateID()}`,
+        listTitle,
+        tasks: [],
+      });
+      this.hideAddListForm();
     },
     removeList(listId) {
       const listIndex = this.todoLists.findIndex((list) => list.listId === listId);
@@ -74,26 +67,21 @@ export default {
       this.createListView = false;
     },
     addTask(task) {
-      const emptyStr = /(^\s{1,}$)|(^.{0}$)/;
-      if (!task.taskText.match(emptyStr)) {
-        const listIndex = this.todoLists.findIndex((list) => list.listId === task.listId);
-        this.todoLists[listIndex].tasks.unshift(
-          {
-            taskId: `TId-${this.generateID()}`,
-            taskState: false,
-            taskText: task.taskText,
-          },
-        );
-      } else {
-        alert('Task should not be empty');
-      }
+      const editedList = this.todoLists.find((list) => list.listId === task.listId);
+      editedList.tasks.unshift(
+        {
+          taskId: `TId-${this.generateID()}`,
+          taskState: false,
+          taskText: task.taskText,
+        },
+      );
     },
     removeTask(taskIdentifiers) {
-      const listIndex = this.todoLists
-        .findIndex((list) => list.listId === taskIdentifiers.listId);
-      const taskIndex = this.todoLists[listIndex].tasks
+      const editedList = this.todoLists
+        .find((list) => list.listId === taskIdentifiers.listId);
+      const taskIndex = editedList.tasks
         .findIndex((list) => list.taskId === taskIdentifiers.taskId);
-      this.todoLists[listIndex].tasks.splice(taskIndex, 1);
+      editedList.tasks.splice(taskIndex, 1);
     },
     generateID() {
       return (new Date() - Math.random()).toString(36).substr(1, 9);
@@ -120,6 +108,7 @@ export default {
     background-color: #efefef;
     border: 1px outset rgb(133, 133, 133);
     border-radius: 3px;
+    margin-right: 10px;
   }
   button {
     cursor: pointer;

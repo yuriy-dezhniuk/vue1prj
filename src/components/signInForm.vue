@@ -5,7 +5,7 @@
       Don’t have an account, please
       <router-link to="/signup">Sign Up</router-link>
     </p>
-  <form v-on:submit.prevent="">
+  <form @submit.prevent="">
     <input
       type="text"
       placeholder="Email"
