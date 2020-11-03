@@ -1,14 +1,13 @@
 <template>
   <div @click="closeForm" class="fullscreen">
-    <form @submit.prevent="">
+    <form @submit.prevent="onClick">
       <input
         v-focus
         type="text"
         v-model="listTitle"
         placeholder="Ente the list name"
-        @keyup.enter="onClick"
       >
-      <button @click="onClick">Create List</button>
+      <button type="submit">Create List</button>
     </form>
   </div>
 </template>
