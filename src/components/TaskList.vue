@@ -23,6 +23,7 @@ import CreateTask from '@/components/CreateTask.vue';
 
 export default {
   name: 'TaskList',
+  props: ['todoList'],
   components: {
     Task,
     CreateTask,
@@ -38,7 +39,6 @@ export default {
       this.$emit('onClickDeltTaskBtn3', taskIdentifiers);
     },
   },
-  props: ['todoList'],
 };
 </script>
 

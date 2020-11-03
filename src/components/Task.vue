@@ -4,7 +4,6 @@
       <input
         type="checkbox"
         v-model="task.taskState"
-        @change="clickOnCheckbox"
       >
       <span class="title">
         {{task.taskText}}
@@ -28,9 +27,9 @@ export default {
         listId: this.listId,
       });
     },
-    clickOnCheckbox() {
-      this.btnDisable = !this.btnDisable;
-    },
+    // clickOnCheckbox() {
+    //   this.btnDisable = !this.btnDisable;
+    // },
   },
 };
 </script>

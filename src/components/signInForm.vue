@@ -5,7 +5,7 @@
       Don’t have an account, please
       <router-link to="/signup">Sign Up</router-link>
     </p>
-  <form @submit.prevent="">
+  <form @submit.prevent="signIn">
     <input
       type="text"
       placeholder="Email"
@@ -18,7 +18,6 @@
     >
     <button
       class="sign-in"
-      @click="signIn"
     >Sign In</button>
   </form>
   </div>

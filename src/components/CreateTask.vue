@@ -22,6 +22,7 @@
 <script>
 export default {
   name: 'CreateTask',
+  props: ['todoList'],
   data: () => ({
     taskText: '',
   }),
@@ -41,7 +42,6 @@ export default {
       this.$emit('removeList0', this.todoList.listId);
     },
   },
-  props: ['todoList'],
 };
 </script>
 
