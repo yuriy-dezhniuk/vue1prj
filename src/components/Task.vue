@@ -26,13 +26,13 @@ export default {
   }),
   methods: {
     onClickDeltTaskBtn() {
-      this.$emit('onClickDeltTaskBtn1', {
+      this.$emit('clickDeltTaskBtn1', {
         taskId: this.taskId,
         listId: this.listId,
       });
     },
     onClickChangTaskState() {
-      this.$emit('onClickChangTaskState1', {
+      this.$emit('clickChangTaskState1', {
         taskId: this.taskId,
         listId: this.listId,
         taskState: this.state,

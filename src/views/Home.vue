@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <!-- <button class="log-out">Log Out</button> -->
     <router-link to="/signin" class="log-out">Log Out</router-link>
     <br><br>
     <button @click="showAddListForm">Add New List</button>
@@ -11,14 +10,14 @@
         :todoList="todoList"
         @removeList1="removeList"
         @addTaskToList="addTask"
-        @onClickDeltTaskBtn3="removeTask"
-        @onClickChangTaskState3="updateTaskState"
+        @clickDeltTaskBtn3="removeTask"
+        @clickChangTaskState3="updateTaskState"
       />
     </ul>
     <CreateList
       v-if="createListView"
       @getListTitle="addNewList"
-      @onCloseForm="hideAddListForm"
+      @closeForm="hideAddListForm"
     />
   </div>
 </template>

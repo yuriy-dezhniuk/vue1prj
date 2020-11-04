@@ -30,11 +30,8 @@ export default {
       }
     },
     closeForm(e) {
-      // if (e.target.className === 'fullscreen') {
-      //   this.$emit('onCloseForm');
-      // }
       if (e.target === e.currentTarget) {
-        this.$emit('onCloseForm');
+        this.$emit('closeForm');
       }
     },
   },
