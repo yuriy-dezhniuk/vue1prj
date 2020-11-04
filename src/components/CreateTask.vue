@@ -19,10 +19,7 @@ export default {
   methods: {
     createTask() {
       if (this.taskText.trim()) {
-        this.$emit('getTask', {
-          taskText: this.taskText,
-          listId: this.todoList.listId,
-        });
+        this.$emit('getTask', this.taskText);
         this.taskText = '';
       } else {
         alert('Task should not be empty');
@@ -42,6 +39,7 @@ export default {
   & button {
     border-radius: 3px;
     cursor: pointer;
+    margin-right: 10px;
   }
   & button:hover {
     filter: invert(10%);
@@ -55,6 +53,7 @@ form {
     margin-right: 10px;
     padding: 5px;
     border-radius: 3px;
+    margin-left: 10px;
   }
 }
 </style>

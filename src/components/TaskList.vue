@@ -36,8 +36,11 @@ export default {
     CreateTask,
   },
   methods: {
-    onGetTask(task) {
-      this.$emit('addTaskToList', task);
+    onGetTask(taskTxt) {
+      this.$emit('addTaskToList', {
+        taskText: taskTxt,
+        listId: this.todoList.listId,
+      });
     },
     onRemoveList() {
       this.$emit('removeList1', this.todoList.listId);
@@ -53,7 +56,7 @@ export default {
 <style scoped lang="scss">
 .wrap {
   background: lightgray;
-  padding: 5px 10px 15px 10px;
+  padding: 5px 0 15px 0;
   max-width: 900px;
   border-radius: 3px 3px 0 0;
   margin: 20px auto 0 auto;
@@ -66,7 +69,7 @@ ul {
   border-radius: 0 0 3px 3px;
 }
 .title-wrap {
-  padding: 10px 0;
+  padding: 10px;
   & .remove-list-btn {
     height: 30px;
     float: right;
