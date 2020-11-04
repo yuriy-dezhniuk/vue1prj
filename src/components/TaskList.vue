@@ -85,4 +85,7 @@ ul {
     text-align: justify;
   }
 }
+button {
+  cursor: pointer;
+}
 </style>
