@@ -58,7 +58,6 @@ export default {
     removeList(listId) {
       const listIndex = this.todoLists.findIndex((list) => list.listId === listId);
       this.todoLists.splice(listIndex, 1);
-      console.log('remove');
     },
     showAddListForm() {
       this.createListView = true;

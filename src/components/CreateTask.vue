@@ -1,22 +1,12 @@
 <template>
-  <div class="wrap">
-    <div class="title-wrap">
-      <button
-        type="button"
-        class="remove-list-btn"
-        @click="onClickRemoveListBtn"
-      >Remove list</button>
-      <h2> {{ todoList.listTitle }} </h2>
-    </div>
-    <form @submit.prevent="createTask">
-      <input
-        type="text"
-        v-model="taskText"
-        placeholder="What needs to be done?"
-      >
-      <button>Create</button>
-    </form>
-  </div>
+  <form @submit.prevent="createTask" class="wrap">
+    <input
+      type="text"
+      v-model="taskText"
+      placeholder="What needs to be done?"
+    >
+    <button>Create</button>
+  </form>
 </template>
 
 <script>
@@ -38,9 +28,6 @@ export default {
         alert('Task should not be empty');
       }
     },
-    onClickRemoveListBtn() {
-      this.$emit('removeList0', this.todoList.listId);
-    },
   },
 };
 </script>
@@ -58,18 +45,6 @@ export default {
   }
   & button:hover {
     filter: invert(10%);
-  }
-    & .title-wrap {
-    padding: 10px 0;
-    & .remove-list-btn {
-      height: 30px;
-      float: right;
-      margin-left: 10px;
-    }
-    & h2 {
-      margin: 0;
-      text-align: justify;
-    }
   }
 }
 form {

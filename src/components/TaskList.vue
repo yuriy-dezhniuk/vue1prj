@@ -1,9 +1,16 @@
 <template>
   <div class="wrap">
+    <div class="title-wrap">
+      <button
+        type="button"
+        class="remove-list-btn"
+        @click="onRemoveList"
+      >Remove list</button>
+      <h2> {{ todoList.listTitle }} </h2>
+    </div>
     <CreateTask
       :todoList="todoList"
       @getTask="onGetTask"
-      @removeList0="onRemoveList"
     />
     <ul>
       <Task
@@ -32,8 +39,8 @@ export default {
     onGetTask(task) {
       this.$emit('addTaskToList', task);
     },
-    onRemoveList(listId) {
-      this.$emit('removeList1', listId);
+    onRemoveList() {
+      this.$emit('removeList1', this.todoList.listId);
     },
     onClickDeltTaskBtn2(taskIdentifiers) {
       this.$emit('onClickDeltTaskBtn3', taskIdentifiers);
@@ -45,6 +52,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .wrap {
+  background: lightgray;
+  padding: 5px 10px 15px 10px;
+  max-width: 900px;
   border-radius: 3px 3px 0 0;
   margin: 20px auto 0 auto;
 }
@@ -54,5 +64,17 @@ ul {
   margin: 0 auto;
   padding: 0;
   border-radius: 0 0 3px 3px;
+}
+.title-wrap {
+  padding: 10px 0;
+  & .remove-list-btn {
+    height: 30px;
+    float: right;
+    margin-left: 10px;
+  }
+  & h2 {
+    margin: 0;
+    text-align: justify;
+  }
 }
 </style>
