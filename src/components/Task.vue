@@ -1,12 +1,13 @@
 <template>
-  <li :class="{done: task.taskState}">
+  <li :class="{done: taskState}">
     <div>
       <input
         type="checkbox"
-        v-model="task.taskState"
+        v-model="state"
+        @change="onClickChangTaskState"
       >
       <span class="title">
-        {{task.taskText}}
+        {{taskText}}
       </span>
     </div>
     <button
@@ -19,17 +20,24 @@
 <script>
 export default {
   name: 'Task',
-  props: ['task', 'listId'],
+  props: ['taskId', 'taskState', 'taskText', 'listId'],
+  data: () => ({
+    state: '',
+  }),
   methods: {
     onClickDeltTaskBtn() {
       this.$emit('onClickDeltTaskBtn1', {
-        taskId: this.task.taskId,
+        taskId: this.taskId,
         listId: this.listId,
       });
     },
-    // clickOnCheckbox() {
-    //   this.btnDisable = !this.btnDisable;
-    // },
+    onClickChangTaskState() {
+      this.$emit('onClickChangTaskState1', {
+        taskId: this.taskId,
+        listId: this.listId,
+        taskState: this.state,
+      });
+    },
   },
 };
 </script>

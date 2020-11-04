@@ -15,9 +15,12 @@
       <Task
         v-for="task in todoList.tasks"
         :key="task.taskId"
-        :task="task"
+        :taskId="task.taskId"
+        :taskState="task.taskState"
+        :taskText="task.taskText"
         :listId="todoList.listId"
         @onClickDeltTaskBtn1="onClickDeltTaskBtn2"
+        @onClickChangTaskState1="onClickChangTaskState2"
       />
     </ul>
   </div>
@@ -46,6 +49,9 @@ export default {
     },
     onClickDeltTaskBtn2(taskIdentifiers) {
       this.$emit('onClickDeltTaskBtn3', taskIdentifiers);
+    },
+    onClickChangTaskState2(taskIdentifiers) {
+      this.$emit('onClickChangTaskState3', taskIdentifiers);
     },
   },
 };

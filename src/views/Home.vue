@@ -12,6 +12,7 @@
         @removeList1="removeList"
         @addTaskToList="addTask"
         @onClickDeltTaskBtn3="removeTask"
+        @onClickChangTaskState3="updateTaskState"
       />
     </ul>
     <CreateList
@@ -81,6 +82,13 @@ export default {
       const taskIndex = editedList.tasks
         .findIndex((list) => list.taskId === taskIdentifiers.taskId);
       editedList.tasks.splice(taskIndex, 1);
+    },
+    updateTaskState(taskIdentifiers) {
+      const editedList = this.todoLists
+        .find((list) => list.listId === taskIdentifiers.listId);
+      const taskIndex = editedList.tasks
+        .findIndex((list) => list.taskId === taskIdentifiers.taskId);
+      editedList.tasks[taskIndex].taskState = taskIdentifiers.taskState;
     },
     generateID() {
       return (new Date() - Math.random()).toString(36).substr(1, 9);
