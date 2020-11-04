@@ -12,7 +12,6 @@
 <script>
 export default {
   name: 'CreateTask',
-  props: ['todoList'],
   data: () => ({
     taskText: '',
   }),

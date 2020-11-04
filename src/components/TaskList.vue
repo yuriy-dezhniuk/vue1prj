@@ -9,7 +9,6 @@
       <h2> {{ todoList.listTitle }} </h2>
     </div>
     <CreateTask
-      :todoList="todoList"
       @getTask="onGetTask"
     />
     <ul>
