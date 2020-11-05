@@ -1,9 +1,14 @@
 <template>
   <li :class="{done: taskState}">
     <div>
-      <input
+      <!-- <input
         type="checkbox"
         v-model="state"
+        @change="onClickChangTaskState"
+      > -->
+      <input
+        type="checkbox"
+        :checked="taskState"
         @change="onClickChangTaskState"
       >
       <span class="title">
@@ -21,9 +26,6 @@
 export default {
   name: 'Task',
   props: ['taskId', 'taskState', 'taskText', 'listId'],
-  data: () => ({
-    state: '',
-  }),
   methods: {
     onClickDeltTaskBtn() {
       this.$emit('clickDeltTaskBtn1', {
@@ -35,7 +37,7 @@ export default {
       this.$emit('clickChangTaskState1', {
         taskId: this.taskId,
         listId: this.listId,
-        taskState: this.state,
+        taskState: this.taskState,
       });
     },
   },

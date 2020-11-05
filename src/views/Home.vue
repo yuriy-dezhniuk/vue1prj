@@ -87,7 +87,7 @@ export default {
         .find((list) => list.listId === taskIdentifiers.listId);
       const taskIndex = editedList.tasks
         .findIndex((list) => list.taskId === taskIdentifiers.taskId);
-      editedList.tasks[taskIndex].taskState = taskIdentifiers.taskState;
+      editedList.tasks[taskIndex].taskState = !taskIdentifiers.taskState;
     },
     generateID() {
       return (new Date() - Math.random()).toString(36).substr(1, 9);
