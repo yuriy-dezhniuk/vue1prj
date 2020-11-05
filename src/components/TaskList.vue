@@ -6,19 +6,19 @@
         class="remove-list-btn"
         @click="onRemoveList"
       >Remove list</button>
-      <h2> {{ todoList.listTitle }} </h2>
+      <h2> {{ listTitle }} </h2>
     </div>
     <CreateTask
       @getTask="onGetTask"
     />
     <ul>
       <Task
-        v-for="task in todoList.tasks"
+        v-for="task in tasks"
         :key="task.taskId"
         :taskId="task.taskId"
         :taskState="task.taskState"
         :taskText="task.taskText"
-        :listId="todoList.listId"
+        :listId="listId"
         @removeTask="onRemoveTask(task.taskId)"
         @changeTaskState="onChangeTaskState(task.taskId)"
       />
@@ -32,7 +32,7 @@ import CreateTask from '@/components/CreateTask.vue';
 
 export default {
   name: 'TaskList',
-  props: ['todoList'],
+  props: ['listId', 'listTitle', 'tasks'],
   components: {
     Task,
     CreateTask,
@@ -41,11 +41,11 @@ export default {
     onGetTask(taskTxt) {
       this.$emit('addTaskToList', {
         taskText: taskTxt,
-        listId: this.todoList.listId,
+        listId: this.listId,
       });
     },
     onRemoveList() {
-      this.$emit('removeList1', this.todoList.listId);
+      this.$emit('removeList1', this.listId);
     },
     onRemoveTask(taskId) {
       this.$emit('removeTask', taskId);

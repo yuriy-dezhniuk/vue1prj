@@ -7,7 +7,9 @@
       <TaskList
         v-for="todoList in todoLists"
         :key="todoList.listId"
-        :todoList="todoList"
+        :listId="todoList.listId"
+        :listTitle="todoList.listTitle"
+        :tasks="todoList.tasks"
         @removeList1="removeList"
         @addTaskToList="addTask"
         @removeTask="onRemoveTask(todoList.listId, $event)"
