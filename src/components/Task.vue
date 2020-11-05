@@ -4,7 +4,7 @@
       <input
         type="checkbox"
         :checked="taskState"
-        @change="onClickChangTaskState"
+        @change="changeState"
       >
       <span class="title">
         {{taskText}}
@@ -12,7 +12,7 @@
     </div>
     <button
       class="item-btn"
-      @click="onClickDeltTaskBtn"
+      @click="remove"
     >Delete</button>
   </li>
 </template>
@@ -22,11 +22,11 @@ export default {
   name: 'Task',
   props: ['taskState', 'taskText'],
   methods: {
-    onClickDeltTaskBtn() {
-      this.$emit('clickDeltTaskBtn1');
+    remove() {
+      this.$emit('removeTask');
     },
-    onClickChangTaskState() {
-      this.$emit('clickChangTaskState1');
+    changeState() {
+      this.$emit('changeTaskState');
     },
   },
 };

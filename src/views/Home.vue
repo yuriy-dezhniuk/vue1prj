@@ -10,8 +10,8 @@
         :todoList="todoList"
         @removeList1="removeList"
         @addTaskToList="addTask"
-        @clickDeltTaskBtn3="removeTask(todoList.listId, $event)"
-        @clickChangTaskState3="updateTaskState(todoList.listId, $event)"
+        @removeTask="onRemoveTask(todoList.listId, $event)"
+        @changeTaskState="updateTaskState(todoList.listId, $event)"
       />
     </ul>
     <CreateList
@@ -75,7 +75,7 @@ export default {
         },
       );
     },
-    removeTask(listId, taskId) {
+    onRemoveTask(listId, taskId) {
       const editedList = this.todoLists
         .find((list) => list.listId === listId);
       const taskIndex = editedList.tasks
