@@ -19,8 +19,8 @@
         :taskState="task.taskState"
         :taskText="task.taskText"
         :listId="todoList.listId"
-        @clickDeltTaskBtn1="onClickDeltTaskBtn2"
-        @clickChangTaskState1="onClickChangTaskState2"
+        @clickDeltTaskBtn1="onClickDeltTaskBtn2(task.taskId)"
+        @clickChangTaskState1="onClickChangTaskState2(task.taskId)"
       />
     </ul>
   </div>
@@ -47,11 +47,11 @@ export default {
     onRemoveList() {
       this.$emit('removeList1', this.todoList.listId);
     },
-    onClickDeltTaskBtn2(taskIdentifiers) {
-      this.$emit('clickDeltTaskBtn3', taskIdentifiers);
+    onClickDeltTaskBtn2(taskId) {
+      this.$emit('clickDeltTaskBtn3', taskId);
     },
-    onClickChangTaskState2(taskIdentifiers) {
-      this.$emit('clickChangTaskState3', taskIdentifiers);
+    onClickChangTaskState2(taskId) {
+      this.$emit('clickChangTaskState3', taskId);
     },
   },
 };

@@ -1,11 +1,6 @@
 <template>
   <li :class="{done: taskState}">
     <div>
-      <!-- <input
-        type="checkbox"
-        v-model="state"
-        @change="onClickChangTaskState"
-      > -->
       <input
         type="checkbox"
         :checked="taskState"
@@ -25,20 +20,13 @@
 <script>
 export default {
   name: 'Task',
-  props: ['taskId', 'taskState', 'taskText', 'listId'],
+  props: ['taskState', 'taskText'],
   methods: {
     onClickDeltTaskBtn() {
-      this.$emit('clickDeltTaskBtn1', {
-        taskId: this.taskId,
-        listId: this.listId,
-      });
+      this.$emit('clickDeltTaskBtn1');
     },
     onClickChangTaskState() {
-      this.$emit('clickChangTaskState1', {
-        taskId: this.taskId,
-        listId: this.listId,
-        taskState: this.taskState,
-      });
+      this.$emit('clickChangTaskState1');
     },
   },
 };

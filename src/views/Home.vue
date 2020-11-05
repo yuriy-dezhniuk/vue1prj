@@ -10,8 +10,8 @@
         :todoList="todoList"
         @removeList1="removeList"
         @addTaskToList="addTask"
-        @clickDeltTaskBtn3="removeTask"
-        @clickChangTaskState3="updateTaskState"
+        @clickDeltTaskBtn3="removeTask(todoList.listId, $event)"
+        @clickChangTaskState3="updateTaskState(todoList.listId, $event)"
       />
     </ul>
     <CreateList
@@ -75,19 +75,19 @@ export default {
         },
       );
     },
-    removeTask(taskIdentifiers) {
+    removeTask(listId, taskId) {
       const editedList = this.todoLists
-        .find((list) => list.listId === taskIdentifiers.listId);
+        .find((list) => list.listId === listId);
       const taskIndex = editedList.tasks
-        .findIndex((list) => list.taskId === taskIdentifiers.taskId);
+        .findIndex((list) => list.taskId === taskId);
       editedList.tasks.splice(taskIndex, 1);
     },
-    updateTaskState(taskIdentifiers) {
+    updateTaskState(listId, taskId) {
       const editedList = this.todoLists
-        .find((list) => list.listId === taskIdentifiers.listId);
+        .find((list) => list.listId === listId);
       const taskIndex = editedList.tasks
-        .findIndex((list) => list.taskId === taskIdentifiers.taskId);
-      editedList.tasks[taskIndex].taskState = !taskIdentifiers.taskState;
+        .findIndex((list) => list.taskId === taskId);
+      editedList.tasks[taskIndex].taskState = !editedList.tasks[taskIndex].taskState;
     },
     generateID() {
       return (new Date() - Math.random()).toString(36).substr(1, 9);
