@@ -22,8 +22,9 @@ export default {
   }),
   methods: {
     onClick() {
-      if (this.listTitle.trim()) {
-        this.$emit('getListTitle', this.listTitle);
+      const lTitle = this.listTitle.trim();
+      if (lTitle) {
+        this.$emit('getListTitle', lTitle);
         this.listTitle = '';
       } else {
         alert('Title should not be empty');
