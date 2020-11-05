@@ -17,8 +17,9 @@ export default {
   }),
   methods: {
     createTask() {
-      if (this.taskText.trim()) {
-        this.$emit('getTask', this.taskText);
+      const taskTxt = this.taskText.trim();
+      if (taskTxt) {
+        this.$emit('getTask', taskTxt);
         this.taskText = '';
       } else {
         alert('Task should not be empty');
