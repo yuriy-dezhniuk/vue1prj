@@ -6,14 +6,8 @@
     <ul class="lists-wrap">
       <TaskList
         v-for="todoList in todoLists"
-        :key="todoList.listId"
-        :listId="todoList.listId"
-        :listTitle="todoList.listTitle"
-        :tasks="todoList.tasks"
-        @removeList1="removeList"
-        @addTaskToList="addTask"
-        @removeTask="onRemoveTask(todoList.listId, $event)"
-        @changeTaskState="updateTaskState(todoList.listId, $event)"
+        :key="todoList.id"
+        :listId="todoList.id"
       />
     </ul>
     <CreateList
@@ -32,67 +26,26 @@ export default {
   name: 'Home',
   data: () => ({
     createListView: false,
-    todoLists: [
-      // {
-      //   listId: 'listId',
-      //   listTitle: 'listTitle',
-      //   tasks: [{
-      //     taskId: 'taskId',
-      //     taskState: true,
-      //     taskText: 'taskText7',
-      //   }],
-      // },
-    ],
   }),
   components: {
     CreateList,
     TaskList,
   },
+  computed: {
+    todoLists() {
+      return this.$store.state.todoLists;
+    },
+  },
   methods: {
     addNewList(listTitle) {
-      this.todoLists.unshift({
-        listId: `LId-${this.generateID()}`,
-        listTitle,
-        tasks: [],
-      });
+      this.$store.commit('addNewList', listTitle);
       this.hideAddListForm();
-    },
-    removeList(listId) {
-      const listIndex = this.todoLists.findIndex((list) => list.listId === listId);
-      this.todoLists.splice(listIndex, 1);
     },
     showAddListForm() {
       this.createListView = true;
     },
     hideAddListForm() {
       this.createListView = false;
-    },
-    addTask(task) {
-      const editedList = this.todoLists.find((list) => list.listId === task.listId);
-      editedList.tasks.unshift(
-        {
-          taskId: `TId-${this.generateID()}`,
-          taskState: false,
-          taskText: task.taskText,
-        },
-      );
-    },
-    onRemoveTask(listId, taskId) {
-      const editedList = this.todoLists
-        .find((list) => list.listId === listId);
-      const taskIndex = editedList.tasks
-        .findIndex((list) => list.taskId === taskId);
-      editedList.tasks.splice(taskIndex, 1);
-    },
-    updateTaskState(listId, taskId) {
-      const editedList = this.todoLists
-        .find((list) => list.listId === listId);
-      const taskIndex = editedList.tasks
-        .findIndex((list) => list.taskId === taskId);
-      editedList.tasks[taskIndex].taskState = !editedList.tasks[taskIndex].taskState;
-    },
-    generateID() {
-      return (new Date() - Math.random()).toString(36).substr(1, 9);
     },
   },
 };
