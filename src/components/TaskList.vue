@@ -15,10 +15,8 @@
       <Task
         v-for="task in tasks"
         :key="task.taskId"
-        :taskId="task.taskId"
         :taskState="task.taskState"
         :taskText="task.taskText"
-        :listId="listId"
         @removeTask="onRemoveTask(task.taskId)"
         @changeTaskState="onChangeTaskState(task.taskId)"
       />
@@ -32,26 +30,31 @@ import CreateTask from '@/components/CreateTask.vue';
 
 export default {
   name: 'TaskList',
-  props: ['listId', 'listTitle', 'tasks'],
+  props: ['listId', 'listTitle'],
   components: {
     Task,
     CreateTask,
   },
+  computed: {
+    tasks() {
+      return this.$store.state.tasks[this.listId];
+    },
+  },
   methods: {
     onGetTask(taskTxt) {
-      this.$emit('addTaskToList', {
+      this.$store.commit('addTask', {
         taskText: taskTxt,
         listId: this.listId,
       });
     },
     onRemoveList() {
-      this.$emit('removeList1', this.listId);
+      this.$store.commit('removeList', this.listId);
     },
     onRemoveTask(taskId) {
-      this.$emit('removeTask', taskId);
+      this.$store.commit('removeTask', { taskId, listId: this.listId });
     },
     onChangeTaskState(taskId) {
-      this.$emit('changeTaskState', taskId);
+      this.$store.commit('updateTaskState', { taskId, listId: this.listId });
     },
   },
 };
