@@ -46,14 +46,14 @@ export default new Vuex.Store({
       );
     },
     removeTask(state, { taskId, listId }) {
-      const taskIndex = state.tasks[listId]
-        .findIndex((task) => task.taskId === taskId);
-      state.tasks[listId].splice(taskIndex, 1);
+      const tasksArr = state.tasks[listId];
+      const taskIndex = tasksArr.findIndex((task) => task.taskId === taskId);
+      tasksArr.splice(taskIndex, 1);
     },
     updateTaskState(state, { taskId, listId }) {
-      const taskIndex = state.tasks[listId]
-        .findIndex((task) => task.taskId === taskId);
-      state.tasks[listId][taskIndex].taskState = !state.tasks[listId][taskIndex].taskState;
+      const tasksArr = state.tasks[listId];
+      const task = tasksArr.find((item) => item.taskId === taskId);
+      task.taskState = !task.taskState;
     },
   },
   actions: {
