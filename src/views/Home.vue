@@ -8,6 +8,7 @@
         v-for="todoList in todoLists"
         :key="todoList.id"
         :listId="todoList.id"
+        :listTitle="todoList.title"
       />
     </ul>
     <CreateList

@@ -30,17 +30,12 @@ import CreateTask from '@/components/CreateTask.vue';
 
 export default {
   name: 'TaskList',
-  props: ['listId'],
+  props: ['listId', 'listTitle'],
   components: {
     Task,
     CreateTask,
   },
   computed: {
-    listTitle() {
-      const listIndex = this.$store.state.todoLists
-        .findIndex((list) => list.id === this.listId);
-      return this.$store.state.todoLists[listIndex].title;
-    },
     tasks() {
       return this.$store.state.tasks[this.listId];
     },
