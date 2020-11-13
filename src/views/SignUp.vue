@@ -54,6 +54,9 @@ export default {
         && (this.userPassword === this.userPasswordConfirm)
       ) {
         alert('You are signed up');
+        this.$store.dispatch('signUserUp', {
+          email: this.userEmail, password: this.userPassword,
+        });
       } else {
         alert('Incorrect username or password.');
       }

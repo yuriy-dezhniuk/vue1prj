@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -5,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    user: null,
     todoLists: [
       // {
       //   id: '123',
@@ -22,6 +24,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setUser(state, user) {
+      state.user = user;
+    },
     addNewList(state, listTitle) {
       const id = `LId-${(new Date() - Math.random()).toString(36).substr(1, 9)}`;
       state.todoLists.unshift({
@@ -57,6 +62,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async signUserUp({ commit }, { email, password }) {
+      const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const newUser = { id: user.user.uid };
+      commit('setUser', newUser);
+    },
   },
   modules: {
   },
