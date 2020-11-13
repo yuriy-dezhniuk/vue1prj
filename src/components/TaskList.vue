@@ -17,8 +17,8 @@
         :key="task.taskId"
         :taskState="task.taskState"
         :taskText="task.taskText"
-        @removeTask="onRemoveTask(task.taskId, listId)"
-        @changeTaskState="onChangeTaskState(task.taskId, listId)"
+        @removeTask="onRemoveTask(task.taskId)"
+        @changeTaskState="onChangeTaskState(task.taskId)"
       />
     </ul>
   </div>
@@ -55,11 +55,11 @@ export default {
     onRemoveList() {
       this.$store.commit('removeList', this.listId);
     },
-    onRemoveTask(taskId, listId) {
-      this.$store.commit('removeTask', { taskId, listId });
+    onRemoveTask(taskId) {
+      this.$store.commit('removeTask', { taskId, listId: this.listId });
     },
-    onChangeTaskState(taskId, listId) {
-      this.$store.commit('updateTaskState', { taskId, listId });
+    onChangeTaskState(taskId) {
+      this.$store.commit('updateTaskState', { taskId, listId: this.listId });
     },
   },
 };
