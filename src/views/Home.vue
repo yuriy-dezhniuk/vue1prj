@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <router-link to="/signin" class="log-out">Log Out</router-link>
+    <span @click="logout">
+      <router-link to="/signin" class="log-out">Log Out</router-link>
+    </span>
     <br><br>
     <button @click="showAddListForm">Add New List</button>
     <ul class="lists-wrap">
@@ -48,6 +50,9 @@ export default {
     },
     hideAddListForm() {
       this.createListView = false;
+    },
+    logout() {
+      this.$store.dispatch('logout');
     },
   },
 };

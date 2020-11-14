@@ -39,6 +39,18 @@ export default {
     userEmail: '',
     userPassword: '',
   }),
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  watch: {
+    user(value) {
+      if (value) {
+        this.$router.push('/');
+      }
+    },
+  },
   methods: {
     signIn() {
       const emaiRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -46,7 +58,10 @@ export default {
         emaiRegExp.test(this.userEmail)
         && this.userPassword.trim()
       ) {
-        alert('You are signed in');
+        this.$store.dispatch('signUserIn', {
+          email: this.userEmail,
+          password: this.userPassword,
+        });
       } else {
         alert('Incorrect username or password.');
       }

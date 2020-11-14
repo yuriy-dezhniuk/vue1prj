@@ -4,6 +4,12 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+// const defaultStore = {
+//   user: null,
+//   todoLists: [],
+//   tasks: {},
+// };
+
 export default new Vuex.Store({
   state: {
     user: null,
@@ -60,12 +66,43 @@ export default new Vuex.Store({
       const task = tasksArr.find((item) => item.taskId === taskId);
       task.taskState = !task.taskState;
     },
+    // resetStore(state) {
+    //   // for (const key in defaultStore) {
+    //   //   if (defaultStore.hasOwnProperty(key)) {
+    //   //     state[key] = defaultStore[key];
+    //   //   }
+    //   // }
+    //   Object.keys(defaultStore).forEach((key) => {
+    //     state[key] = defaultStore[key];
+    //   });
+    // },
   },
   actions: {
     async signUserUp({ commit }, { email, password }) {
-      const user = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      const newUser = { id: user.user.uid };
-      commit('setUser', newUser);
+      try {
+        const user = await firebase.auth()
+          .createUserWithEmailAndPassword(email, password);
+        const newUser = { id: user.user.uid };
+        commit('setUser', newUser);
+      } catch (err) {
+        alert(err.message);
+      }
+    },
+    async signUserIn({ commit }, { email, password }) {
+      try {
+        const user = await firebase.auth()
+          .signInWithEmailAndPassword(email, password);
+        commit('setUser', { id: user.user.uid });
+      } catch (err) {
+        alert(err.message);
+      }
+    },
+    logout({ commit }) {
+      firebase.auth().signOut();
+      commit('setUser', null);
+    },
+    autoSignIn({ commit }, { uid }) {
+      commit('setUser', { id: uid });
     },
   },
   modules: {

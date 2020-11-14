@@ -45,6 +45,18 @@ export default {
     userPassword: '',
     userPasswordConfirm: '',
   }),
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  watch: {
+    user(value) {
+      if (value) {
+        this.$router.push('/');
+      }
+    },
+  },
   methods: {
     signUp() {
       const emaiRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -53,7 +65,6 @@ export default {
         && this.userPassword.trim()
         && (this.userPassword === this.userPasswordConfirm)
       ) {
-        alert('You are signed up');
         this.$store.dispatch('signUserUp', {
           email: this.userEmail, password: this.userPassword,
         });
