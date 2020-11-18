@@ -5,6 +5,5 @@ export default function (to, from, next) {
     next();
   } else {
     next('/signin');
-    console.log(store.state.user);
   }
 }

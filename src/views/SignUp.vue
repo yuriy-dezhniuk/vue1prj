@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import emailRegExp from '@/helpers/emailRegExp.vue';
+
 export default {
   name: 'SignUp',
   data: () => ({
@@ -59,15 +61,14 @@ export default {
   },
   methods: {
     signUp() {
-      const emaiRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
       if (
-        emaiRegExp.test(this.userEmail)
+        emailRegExp.test(this.userEmail)
         && this.userPassword.trim()
         && (this.userPassword === this.userPasswordConfirm)
       ) {
         this.$store.dispatch('signUserUp', {
           email: this.userEmail, password: this.userPassword,
-        });
+        }).catch((err) => alert(err.message));
       } else {
         alert('Incorrect username or password.');
       }
