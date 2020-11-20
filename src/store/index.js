@@ -123,7 +123,8 @@ export default new Vuex.Store({
     },
     async removeTask({ commit, state }, { taskId, listId }) {
       const userId = state.user.id;
-      await firebase.database().ref(`tasks/${userId}/${listId}/${taskId}`).set(null);
+      await firebase.database()
+        .ref(`tasks/${userId}/${listId}/${taskId}`).remove();
       commit('removeTask', { taskId, listId });
     },
     async updateTaskState({ commit, state }, { taskId, listId }) {
