@@ -96,8 +96,9 @@ export default new Vuex.Store({
     },
     async loadLists({ commit, state }) {
       const userId = state.user.id;
-      const lists = await firebase.database().ref(`lists/${userId}`)
-        .once('value').then((snapshot) => snapshot.val()) || {};
+      const snapshot = await firebase.database()
+        .ref(`lists/${userId}`).once('value');
+      const lists = snapshot.val() || {};
       const listsArr = Object.entries(lists);
       listsArr.forEach((list) => {
         commit('addNewList', { id: list[0], title: list[1] });
