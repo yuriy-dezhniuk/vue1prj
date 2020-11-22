@@ -3,7 +3,6 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-// import firebase from 'firebase';
 
 Vue.config.productionTip = false;
 
@@ -18,6 +17,16 @@ new Vue({
       messagingSenderId: '529368896699',
       appId: '1:529368896699:web:c545d3ed6ec3a1f66e459e',
     });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user);
+        this.$store.dispatch('loadLists');
+        this.$store.dispatch('loadTasks');
+      } else {
+        this.$store.commit('resetStore');
+      }
+    });
+    window.firebase = firebase;
   },
   router,
   store,

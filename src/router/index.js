@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
+import authGuard from './auth-guard';
+import signinGuard from './signin-guard';
 
 Vue.use(VueRouter);
 
@@ -11,16 +13,19 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    beforeEnter: authGuard,
   },
   {
     path: '/signin',
     name: 'SignIn',
     component: SignIn,
+    beforeEnter: signinGuard,
   },
   {
     path: '/signup',
     name: 'SignUp',
     component: SignUp,
+    beforeEnter: signinGuard,
   },
   // {
   //   path: '/about',

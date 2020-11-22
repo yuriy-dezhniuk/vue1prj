@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <router-link to="/signin" class="log-out">Log Out</router-link>
+    <button @click="logout" class="log-out">
+      Log Out
+    </button>
     <br><br>
     <button @click="showAddListForm">Add New List</button>
     <ul class="lists-wrap">
@@ -27,7 +29,6 @@ export default {
   name: 'Home',
   data: () => ({
     createListView: false,
-
   }),
   components: {
     CreateList,
@@ -40,7 +41,7 @@ export default {
   },
   methods: {
     addNewList(listTitle) {
-      this.$store.commit('addNewList', listTitle);
+      this.$store.dispatch('createTaskList', listTitle);
       this.hideAddListForm();
     },
     showAddListForm() {
@@ -48,6 +49,10 @@ export default {
     },
     hideAddListForm() {
       this.createListView = false;
+    },
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push({ path: '/signin' });
     },
   },
 };
