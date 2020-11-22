@@ -43,7 +43,10 @@ export default new Vuex.Store({
       delete state.tasks[listId];
     },
     addTask(state, {
-      taskText, listId, taskId, taskState,
+      taskText,
+      listId,
+      taskId,
+      taskState,
     }) {
       state.tasks[listId].unshift({
         taskId,
@@ -68,6 +71,17 @@ export default new Vuex.Store({
       state.user = null;
       state.todoLists = [];
       state.tasks = {};
+    },
+    setLoadedTasks(state, tasksArr) {
+      tasksArr.forEach((taskList) => {
+        Object.entries(taskList[1]).forEach((item) => {
+          state.tasks[taskList[0]].unshift({
+            taskId: item[0],
+            taskState: item[1].state,
+            taskText: item[1].taskText,
+          });
+        });
+      });
     },
   },
   actions: {
@@ -141,16 +155,7 @@ export default new Vuex.Store({
       const tasks = await firebase.database().ref(`tasks/${userId}`)
         .once('value').then((snapshot) => snapshot.val()) || {};
       const tasksArr = Object.entries(tasks);
-      tasksArr.forEach((taskList) => {
-        Object.entries(taskList[1]).forEach((item) => {
-          commit('addTask', {
-            taskText: item[1].taskText,
-            listId: taskList[0],
-            taskId: item[0],
-            taskState: item[1].state,
-          });
-        });
-      });
+      commit('setLoadedTasks', tasksArr);
     },
   },
   modules: {
