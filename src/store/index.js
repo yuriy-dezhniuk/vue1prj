@@ -91,7 +91,7 @@ export default new Vuex.Store({
     },
     async createTaskList({ commit, state }, listTitle) {
       const userId = state.user.id;
-      const data = await firebase.database().ref(`lists/${userId}`).push(listTitle);
+      const data = await firebase.database().ref(`lists/${userId}`).push({ listTitle });
       commit('addNewList', { id: data.key, title: listTitle });
     },
     async loadLists({ commit, state }) {
@@ -101,7 +101,7 @@ export default new Vuex.Store({
       const lists = snapshot.val() || {};
       const listsArr = Object.entries(lists);
       listsArr.forEach((list) => {
-        commit('addNewList', { id: list[0], title: list[1] });
+        commit('addNewList', { id: list[0], title: list[1].listTitle });
       });
     },
     async removeList({ commit, state }, listId) {
