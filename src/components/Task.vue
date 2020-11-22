@@ -26,7 +26,7 @@ export default {
       this.$emit('removeTask');
     },
     changeState() {
-      this.$emit('changeTaskState');
+      this.$emit('changeTaskState', this.taskState);
     },
   },
 };

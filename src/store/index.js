@@ -56,10 +56,10 @@ export default new Vuex.Store({
       const taskIndex = tasksArr.findIndex((task) => task.taskId === taskId);
       tasksArr.splice(taskIndex, 1);
     },
-    updateTaskState(state, { taskId, listId }) {
+    updateTaskState(state, { taskId, listId, taskState }) {
       const tasksArr = state.tasks[listId];
       const task = tasksArr.find((item) => item.taskId === taskId);
-      task.taskState = !task.taskState;
+      task.taskState = !taskState;
     },
     resetStore(state) {
       // Object.keys(defaultStore).forEach((key) => {
@@ -130,12 +130,11 @@ export default new Vuex.Store({
         .ref(`tasks/${userId}/${listId}/${taskId}`).remove();
       commit('removeTask', { taskId, listId });
     },
-    async updateTaskState({ commit, state }, { taskId, listId }) {
+    async updateTaskState({ commit, state }, { taskId, listId, taskState }) {
       const userId = state.user.id;
-      const task = state.tasks[listId].find((item) => item.taskId === taskId);
       await firebase.database()
-        .ref(`tasks/${userId}/${listId}/${taskId}/state`).set(!task.taskState);
-      commit('updateTaskState', { taskId, listId });
+        .ref(`tasks/${userId}/${listId}/${taskId}/state`).set(!taskState);
+      commit('updateTaskState', { taskId, listId, taskState });
     },
     async loadTasks({ commit, state }) {
       const userId = state.user.id;

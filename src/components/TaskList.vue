@@ -18,7 +18,7 @@
         :taskState="task.taskState"
         :taskText="task.taskText"
         @removeTask="onRemoveTask(task.taskId)"
-        @changeTaskState="onChangeTaskState(task.taskId)"
+        @changeTaskState="onChangeTaskState($event, task.taskId)"
       />
     </ul>
   </div>
@@ -53,8 +53,12 @@ export default {
     onRemoveTask(taskId) {
       this.$store.dispatch('removeTask', { taskId, listId: this.listId });
     },
-    onChangeTaskState(taskId) {
-      this.$store.dispatch('updateTaskState', { taskId, listId: this.listId });
+    onChangeTaskState(taskState, taskId) {
+      this.$store.dispatch('updateTaskState', {
+        taskId,
+        listId: this.listId,
+        taskState,
+      });
     },
   },
 };
